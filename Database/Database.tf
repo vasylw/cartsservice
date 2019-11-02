@@ -26,8 +26,14 @@ resource "aws_instance"  "database" {
     
           
 provisioner "local-exec" {
-    command = "echo ${aws_instance.database.public_ip} > public_ip_database.txt"
+    command = "echo ${aws_instance.database.private_ip} > private_ip_database.txt"
+    
   }
 
+provisioner "local-exec" {
+    command = "echo "[database_server]" > database_server"
+    command = "echo ${aws_instance.database.private_ip} > database_server"
+    
+  }
 
 }

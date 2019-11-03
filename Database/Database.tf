@@ -31,7 +31,8 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo -e '[database_server] \n${aws_instance.database.private_ip}' > database_server"
+    command = "echo '[database_server] \n${aws_instance.database.private_ip}' > database_server"
+    interpreter = ["/bin/bash", "-e"]
   }
 
 }

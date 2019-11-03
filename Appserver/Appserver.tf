@@ -39,7 +39,7 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo \n${aws_instance.carts_app.private_ip} >> carts_app_server"
+    command = "echo '${aws_instance.carts_app.private_ip}' >> carts_app_server"
   }
 
 }

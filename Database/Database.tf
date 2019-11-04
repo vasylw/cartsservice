@@ -31,12 +31,12 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo [database_server] > database_server"
+    command = "echo [database_server] >> hosts"
     
   }
 
 provisioner "local-exec" {
-    command = "echo '${aws_instance.database.private_ip}' >> database_server"
+    command = "echo '${aws_instance.database.private_ip}' >> hosts"
     
   }
 

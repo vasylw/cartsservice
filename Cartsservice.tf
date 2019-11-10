@@ -11,6 +11,13 @@ resource "aws_security_group" "carts_sg" {
   name        = "carts_sg"
   description = "Allow 22_8081 port inbound traffic"
 
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     from_port   = 8081
     to_port     = 8081
@@ -33,6 +40,13 @@ resource "aws_security_group" "carts_sg" {
 resource "aws_security_group" "database_sg" {
   name        = "database_sg"
   description = "Allow 22_27017 port inbound traffic"
+
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port   = 27017

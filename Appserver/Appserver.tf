@@ -39,7 +39,7 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo '${aws_instance.carts_app.private_ip}' >> hosts"
+    command = "echo '${aws_instance.carts_app.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"
   }
 
 }

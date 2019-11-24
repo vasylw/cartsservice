@@ -81,7 +81,8 @@ resource "aws_security_group" "database_sg" {
     to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = [var.subnet]
-
+  }
+  
   ingress {
     from_port   = 22
     to_port     = 22

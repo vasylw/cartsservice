@@ -9,7 +9,7 @@ provider "aws" {
 
 resource "aws_security_group" "carts_sg" {
   name        = "carts_sg"
-  description = "Allow 22_8081 port inbound traffic"
+  description = "Allow 22_8081_80_443 port inbound traffic"
 
   egress {
     from_port   = 80
@@ -25,6 +25,13 @@ resource "aws_security_group" "carts_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  egress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
   ingress {
     from_port   = 8081
     to_port     = 8081
@@ -68,6 +75,12 @@ resource "aws_security_group" "database_sg" {
     protocol    = "tcp"
     cidr_blocks = [var.subnet]
   }
+  
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = [var.subnet]
 
   ingress {
     from_port   = 22

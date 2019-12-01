@@ -31,9 +31,30 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
+    command = "echo carts-db  ${aws_instance.database.private_ip} >> hosts"
+    
+  }
+
+provisioner "local-exec" {
+    command = "echo carts  ${aws_instance.carts.private_ip} >> /etc/hosts"
+    
+  }
+    
+provisioner "local-exec" {
+    command = "echo catalogue  ${aws_instance.carts.private_ip} >> /etc/hosts"
+    
+  }
+    
+provisioner "local-exec" {
+    command = "echo front-end  ${aws_instance.carts.private_ip} >> /etc/hosts"
+    
+  }
+
+provisioner "local-exec" {
     command = "echo [database_server] >> hosts"
     
   }
+    
 
 provisioner "local-exec" {
     command = "echo '${aws_instance.database.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"

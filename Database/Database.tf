@@ -31,12 +31,12 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo carts-db  ${aws_instance.database.private_ip} >> ./etc/hosts"
+    command = "echo carts-db  ${aws_instance.database.private_ip} >> etc_hosts"
     
   }
     
 provisioner "local-exec" {
-    command = "echo catalogue-db  ${aws_instance.database.private_ip} >> ./etc/hosts"
+    command = "echo catalogue-db  ${aws_instance.database.private_ip} >> etc_hosts"
     }   
 
 provisioner "local-exec" {

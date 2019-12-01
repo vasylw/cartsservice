@@ -35,17 +35,17 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo carts  ${aws_instance.carts_app.private_ip} >> ./etc/hosts"
+    command = "echo carts  ${aws_instance.carts_app.private_ip} >> etc_hosts"
     
   }
     
 provisioner "local-exec" {
-    command = "echo catalogue  ${aws_instance.carts_app.private_ip} >> ./etc/hosts"
+    command = "echo catalogue  ${aws_instance.carts_app.private_ip} >> etc_hosts"
     
   }
 
 provisioner "local-exec" {
-    command = "echo front-end  ${aws_instance.carts_app.private_ip} >> ./etc/hosts"
+    command = "echo front-end  ${aws_instance.carts_app.private_ip} >> etc_hosts"
     
   }
     

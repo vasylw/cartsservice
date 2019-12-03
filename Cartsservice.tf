@@ -9,7 +9,7 @@ provider "aws" {
 
 resource "aws_security_group" "carts_sg" {
   name        = "carts_sg"
-  description = "Allow 22_8081_80_443 port inbound traffic"
+  description = "Allow port in/out_bound traffic"
 
   egress {
     from_port   = 80
@@ -33,19 +33,19 @@ resource "aws_security_group" "carts_sg" {
   } 
   
   egress {
-    from_port   = 8079
-    to_port     = 8079
-    protocol    = "tcp"
-    cidr_blocks = [var.subnet]
-  }
-  
-  egress {
     from_port   = 8081
     to_port     = 8081
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -74,13 +74,28 @@ resource "aws_security_group" "carts_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-   ingress {
-    from_port   = 8079
-    to_port     = 8079
+   # Allow all in/out_bound
+  ingress {
+    from_port   = 0
+    to_port     = 65535
     protocol    = "tcp"
     cidr_blocks = [var.subnet]
   }
-  
+
+  egress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = [var.subnet]
+  }
+
+  # Enable ICMP
+  ingress {
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }  
   
   tags = {
     Name = "allow_all_to_carts"
@@ -89,7 +104,7 @@ resource "aws_security_group" "carts_sg" {
 
 resource "aws_security_group" "database_sg" {
   name        = "database_sg"
-  description = "Allow 22_27017 port inbound traffic"
+  description = "Allow  port in/out_bound traffic"
 
   egress {
     from_port   = 80
@@ -105,42 +120,28 @@ resource "aws_security_group" "database_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow all in/out_bound
+  ingress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = [var.subnet]
+  }
+
   egress {
-    from_port   = 27017
-    to_port     = 27017
+    from_port   = 0
+    to_port     = 65535
     protocol    = "tcp"
     cidr_blocks = [var.subnet]
   }
-  
-  egress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = [var.subnet]
-  }
-  
+
+  # Enable ICMP
   ingress {
-    from_port   = 27017
-    to_port     = 27017
-    protocol    = "tcp"
-    cidr_blocks = [var.subnet]
-  }
-  
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = [var.subnet]
-  }
-  
-  
-  
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.subnet]
-  }
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }  
 
   tags = {
     Name = "allow_local_to_database"

@@ -181,6 +181,20 @@ resource "aws_security_group" "elk_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   
+ egress {
+    from_port   = 5601
+    to_port     = 5601
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
+  egress {
+    from_port   = 9200
+    to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
   ingress {
     from_port   = 443
     to_port     = 443
@@ -216,7 +230,21 @@ resource "aws_security_group" "elk_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-   # Allow all in/out_bound
+  ingress {
+    from_port   = 5601
+    to_port     = 5601
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
+  ingress {
+    from_port   = 9200
+    to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
+   # Allow all in/out_bound localy
   ingress {
     from_port   = 0
     to_port     = 65535

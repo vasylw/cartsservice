@@ -55,6 +55,10 @@ provisioner "local-exec" {
 provisioner "local-exec" {
     command = "echo user www-data >> nginx.conf"
   }  
+ 
+provisioner "local-exec" {
+    command = "echo kibanauser >> htpasswd.users"
+  }  
     
  provisioner "local-exec" {
     command = "echo filebeat.inputs: - type: log  enabled: false  paths: - /var/log/*.log   setup.kibana: output.elasticsearch:  hosts: ['localhost:9200'] username: 'elastic'  password: 'changeme'  processors:- add_host_metadata: ~  - add_cloud_metadata: ~ - add_docker_metadata: ~ - add_kubernetes_metadata: ~  >> filebeat.yml"

@@ -59,7 +59,7 @@ provisioner "local-exec" {
     command = "echo user www-data; worker_processes 4; pid /var/run/nginx.pid; events { worker_connections 768;  # multi_accept on;} >> nginx.conf"
     
  provisioner "local-exec" {
-    command = "echo filebeat.inputs: - type: log  enabled: false  paths: - /var/log/*.log   setup.kibana: output.elasticsearch:  hosts: ["localhost:9200"] username: "elastic"  password: "changeme"  processors:- add_host_metadata: ~  - add_cloud_metadata: ~ - add_docker_metadata: ~ - add_kubernetes_metadata: ~  >> filebeat.yml"
+    command = "echo filebeat.inputs: - type: log  enabled: false  paths: - /var/log/*.log   setup.kibana: output.elasticsearch:  hosts: ['localhost:9200'] username: 'elastic'  password: 'changeme'  processors:- add_host_metadata: ~  - add_cloud_metadata: ~ - add_docker_metadata: ~ - add_kubernetes_metadata: ~  >> filebeat.yml"
   } 
     
     

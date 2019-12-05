@@ -48,7 +48,7 @@ provisioner "local-exec" {
   }
 
 provisioner "local-exec" {
-    command = "echo input { tcp {port => 9500}} output { elasticsearch { hosts => ["elasticsearch:9200"] user => elastic  password => changeme  } }     >> /etc/logstash.conf"
+    command = "echo input { tcp {port => 9500}} output { elasticsearch { hosts => ["elasticsearch:9200"] user => elastic  password => changeme  } }     >> /home/logstash.conf"
   }    
     
     

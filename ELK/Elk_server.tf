@@ -47,4 +47,9 @@ provisioner "local-exec" {
     command = "echo '${aws_instance.elk.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"
   }
 
+provisioner "local-exec" {
+    command = "echo input { tcp {port => 9500}} output { elasticsearch { hosts => ["elasticsearch:9200"] user => elastic  password => changeme  } }     >> /etc/logstash.conf"
+  }    
+    
+    
 }

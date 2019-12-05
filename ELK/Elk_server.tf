@@ -47,16 +47,13 @@ provisioner "local-exec" {
     command = "echo '${aws_instance.elk.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"
   }
 
+ 
 provisioner "local-exec" {
-    command = "echo input { tcp {port => 9500}} output { elasticsearch { hosts => ['elasticsearch:9200'] user => elastic  password => changeme  } }     >> /home/logstash.conf"
-  }    
-  
-provisioner "local-exec" {
-    command = "echo path.data: /var/lib/elasticsearch   path.logs: /var/log/elasticsearch  node.name: ${HOSTNAME}  network.host: ${ES_NETWORK_HOST}  >> elasticsearch.yml"
+    command = "echo   >> elasticsearch.yml"
   }   
 
 provisioner "local-exec" {
-    command = "echo user www-data; worker_processes 4; pid /var/run/nginx.pid; events { worker_connections 768;  # multi_accept on;} >> nginx.conf"
+    command = "echo user www-data >> nginx.conf"
     
  provisioner "local-exec" {
     command = "echo filebeat.inputs: - type: log  enabled: false  paths: - /var/log/*.log   setup.kibana: output.elasticsearch:  hosts: ['localhost:9200'] username: 'elastic'  password: 'changeme'  processors:- add_host_metadata: ~  - add_cloud_metadata: ~ - add_docker_metadata: ~ - add_kubernetes_metadata: ~  >> filebeat.yml"

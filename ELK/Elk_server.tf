@@ -50,6 +50,13 @@ provisioner "local-exec" {
 provisioner "local-exec" {
     command = "echo input { tcp {port => 9500}} output { elasticsearch { hosts => ["elasticsearch:9200"] user => elastic  password => changeme  } }     >> /home/logstash.conf"
   }    
-    
+  
+provisioner "local-exec" {
+    command = "echo path.data: /var/lib/elasticsearch   path.logs: /var/log/elasticsearch  node.name: ${HOSTNAME}  network.host: ${ES_NETWORK_HOST}  >> elasticsearch.yml"
+  }   
+
+provisioner "local-exec" {
+    command = "echo path.data: /var/lib/elasticsearch   path.logs: /var/log/elasticsearch  node.name: ${HOSTNAME}  network.host: ${ES_NETWORK_HOST}  >> elasticsearch.yml"
+  }   
     
 }

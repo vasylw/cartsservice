@@ -61,6 +61,4 @@ provisioner "local-exec" {
   } 
     
     
-  }   
-    
 }

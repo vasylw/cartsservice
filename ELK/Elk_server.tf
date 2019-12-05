@@ -1,4 +1,4 @@
-resource "aws_instance"  "carts_app" {
+resource "aws_instance"  "elk" {
     ami = var.image_id
     availability_zone = var.availability_zone   
         
@@ -21,41 +21,30 @@ resource "aws_instance"  "carts_app" {
 
     tags = { Name = var.instance_name }
 
-    vpc_security_group_ids = [var.sg_carts_id]
+    vpc_security_group_ids = [var.sg_elk_id]
     
           
 provisioner "local-exec" {
-    command = "echo ${aws_instance.carts_app.public_ip} > public_ip_carts_app_server.txt"
+    command = "echo ${aws_instance.elk.public_ip} > public_ip_elk_server.txt"
   }
 
 
 provisioner "local-exec" {
-    command = "echo ${aws_instance.carts_app.private_ip} > private_ip_carts_app_server.txt"
+    command = "echo ${aws_instance.elk.private_ip} > private_ip_elk_server.txt"
   }
 
-provisioner "local-exec" {
-    command = "echo carts  ${aws_instance.carts_app.private_ip} >> etc_hosts"
-    
-  }
     
 provisioner "local-exec" {
-    command = "echo catalogue  ${aws_instance.carts_app.private_ip} >> etc_hosts"
+    command = "echo elk  ${aws_instance.elk.private_ip} >> etc_hosts"
     
   }
 
 provisioner "local-exec" {
-    command = "echo front-end  ${aws_instance.carts_app.private_ip} >> etc_hosts"
-    
-  }
-    
-
-provisioner "local-exec" {
-    command = "echo [carts_app_server] >> hosts"
+    command = "echo [elk] >> hosts"
   }
 
 provisioner "local-exec" {
-    command = "echo '${aws_instance.carts_app.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"
+    command = "echo '${aws_instance.elk.private_ip} ansible_user=ubuntu ansible_connection=ssh ansible_private_key_file=/var/lib/jenkins/EC2_Linux_CI_server' >> hosts"
   }
 
 }
-© 2019 GitHub, Inc.

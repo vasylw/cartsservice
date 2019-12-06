@@ -3,7 +3,7 @@ resource "aws_instance"  "elk" {
     availability_zone = var.availability_zone   
         
     root_block_device {
-      volume_size = "18"
+      volume_size = "60"
     }
     
         

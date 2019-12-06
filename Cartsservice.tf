@@ -314,6 +314,6 @@ module "elk" {
   availability_zone     = var.azone[var.uf_azone]
   image_id = var.amis[var.region[var.uf_region]]
   instance_name = "elk"
-  instance_type = var.instance_type
+  instance_type = "t2.medium"
   sg_elk_id = aws_security_group.elk_sg.id
 }

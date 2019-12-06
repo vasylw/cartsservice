@@ -195,6 +195,14 @@ resource "aws_security_group" "elk_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   } 
   
+ egress {
+    from_port   = 9300
+    to_port     = 9300
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
+  
   ingress {
     from_port   = 443
     to_port     = 443
@@ -240,6 +248,13 @@ resource "aws_security_group" "elk_sg" {
   ingress {
     from_port   = 9200
     to_port     = 9200
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  } 
+  
+  inress {
+    from_port   = 9300
+    to_port     = 9300
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   } 
